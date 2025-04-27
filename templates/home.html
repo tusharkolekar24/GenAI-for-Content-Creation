@@ -1,0 +1,82 @@
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+</head>
+<body>
+{% extends "base.html" %}
+
+    {% block form_container %}
+    <div class="form-container">
+        <h1>Parameters</h1>
+        <div class="sidebar-divider"></div>
+        <form action="{{ url_for('submit_home_form') }}" method="post" id="userForm">
+            <div class="form-group">
+                <label for="type_model">1.Type of Model</label>
+                <select id="type_model" name="type_model" required>
+                    {% for model_name in form_data.type_model %}
+                        <option value='{{ model_name }}'>{{model_name}}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="temp_info">2.Temp Informations</label>
+                <select id="temp_info" name="temp_info" required>
+                    
+                    {% for temp_info in form_data.temp_infos %}
+                        <option value='{{ temp_info }}'>{{temp_info}}</option>
+                    {% endfor %}
+                </select>
+
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    {% endblock %}
+
+    {% block navbar_main %}
+        <h1>LangChain Demo</h1>
+        <form action="{{ url_for('topic_info_update')}}" method="post" id="topicInfoUpdate">
+        <div class="text-box">
+            <!-- <h2>Enter Your Topic Informations</h2> -->
+            {% if content_info %}
+               <textarea name="requested_topic_info" placeholder="Enter your Topic Details...">{{ content_info.input_content }}</textarea>
+               
+            {% else %}            
+               <textarea name="requested_topic_info" placeholder="Enter your Topic Details..."></textarea>
+            {% endif %}
+        </div>
+        
+
+            <button class="submit-button-info">Generate Info</button>
+        </form>
+        
+
+        <!-- <div class="response">
+            {% if content_info %}
+                <textarea name="generated_response" placeholder="Generated Content for your Topic..." readonly>
+        =========================
+            {{ content_info.generated_response.Headline }}
+        =========================
+        
+        {{ content_info.generated_response.Content }}
+                </textarea>           
+            {% else %}
+                <textarea name="generated_response" placeholder="Generate Content for your Topic..."></textarea>
+            {% endif %}
+        </div> -->
+
+        <div class="response">
+            {% if content_info %}
+                <div class="editable-area" contenteditable="true">
+                    <div class="headline">{{ content_info.generated_response.Headline }}</div>
+                    <p>{{ content_info.generated_response.Content }}</p>
+                </div>
+            {% else %}
+                <div class="editable-area" contenteditable="true" placeholder="Generate Content for your Topic..."></div>
+            {% endif %}
+        </div>
+
+
+    {% endblock %}
+</body>
