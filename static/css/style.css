@@ -273,14 +273,14 @@ body {
 }
 
 .response textarea{
-    min-height: 300px; 
+    min-height: 280px; 
     font-family: 'Courier New', Courier, monospace;
     font-size: 20px;
 }
 
 .editable-area {
     width: 100%;
-    min-height: 350px;
+    min-height: 280px;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 10px;
@@ -304,7 +304,7 @@ body {
 }
 
 .text-box textarea{
-    min-height: 90px; 
+    min-height: 70px; 
     font-size: 14px;
 }
 
